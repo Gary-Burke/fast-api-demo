@@ -1,0 +1,9 @@
+
+:root {
+    --dark-color: #282c34;
+    --light-color: #dadde4;
+}
+
+nav {
+    background-color: var(--dark-color);
+}
