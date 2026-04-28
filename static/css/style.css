@@ -1,9 +1,35 @@
 
 :root {
     --dark-color: #282c34;
-    --light-color: #dadde4;
+    --light-color: #e6e8ec;
 }
 
-nav {
+header {
     background-color: var(--dark-color);
+    color: var(--light-color);
+}
+
+body {
+    background-color: var(--dark-color);
+    color: var(--dark-color);
+}
+
+form {
+    background-color: var(--light-color);
+    border-radius: 0.75rem;
+}
+
+.result {
+  white-space: pre-line;
+}
+
+.btn-primary {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: var(--dark-color);
+    border-color: var(--dark-color);
 }

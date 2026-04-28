@@ -3,7 +3,7 @@
 {% block content %}
 <div class="d-flex flex-row">
     <form id="unique-form">
-        <fieldset class="border rounded p-2">
+        <fieldset class="p-3">
             <legend>Unique Numbers</legend>
             <div class="mb-3">
                 <label for="unique_amount" class="form-label">Amount of numbers:</label>
@@ -11,21 +11,21 @@
                     placeholder="e.g. 6">
             </div>
             <div class="mb-3">
-                <label for="unique_min" class="form-label">Range Min</label>
+                <label for="unique_min" class="form-label">Min Range:</label>
                 <input type="number" class="form-control" id="unique_min" name="unique_min"
                     placeholder="e.g. 1">
             </div>
             <div class="mb-3">
-                <label for="unique_max" class="form-label">Range Max</label>
+                <label for="unique_max" class="form-label">Max Range:</label>
                 <input type="number" class="form-control" id="unique_max" name="unique_max"
                     placeholder="e.g. 49">
             </div>
-            <div class="col-auto">
+            <div class="col">
                 <button type="submit" class="btn btn-primary mb-3">Generate</button>
             </div>
             <div>
-                <p>Result:</p>
-                <p id="unique-result"></p>
+                <p class="mb-1"><strong>Result:</strong></p>
+                <p class="mb-1 result" id="unique-result"></p>
             </div>
         </fieldset>
     </form>

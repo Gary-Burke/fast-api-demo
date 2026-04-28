@@ -29,10 +29,15 @@ async def unique_nums(
     unique_min: int = 0,
     unique_max: int = 0
 ):
-    if (unique_min > unique_max):  # Form input validation to ensure max > min
+    #  Form input validation to ensure amount of numbers is less than range
+    #  This also covers validation to prevent min range bigger than max
+    if (unique_amount > (unique_max - unique_min)):
         return JSONResponse(
             status_code=400,
-            content={"error": "Min range must be less than max range"}
+            content={
+                "error": "Amount of numbers exceeds total range.\n"
+                "(Tip: Ensure min range is smaller than max)"
+            }
         )
 
     nums = []
