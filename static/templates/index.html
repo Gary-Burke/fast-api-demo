@@ -2,6 +2,8 @@
 
 {% block content %}
 <div class="d-flex flex-row">
+
+    <!-- Unique Numbers -->
     <form id="unique-form">
         <fieldset class="p-3">
             <legend>Unique Numbers</legend>
@@ -31,6 +33,30 @@
             <div>
                 <p class="mb-1"><strong>Result:</strong></p>
                 <p class="mb-1 result" id="unique-result"></p>
+            </div>
+        </fieldset>
+    </form>
+
+    <!-- Prime Numbers -->
+     <form id="prime-form" class="ms-3">
+        <fieldset class="p-3">
+            <legend>Prime Numbers</legend>            
+            <div class="mb-3">
+                <label for="prime_min" class="form-label">Min Range:</label>
+                <input type="number" class="form-control" id="prime_min" name="prime_min" min="1"
+                    placeholder="e.g. 6">
+            </div>
+            <div class="mb-3">
+                <label for="prime_max" class="form-label">Max Range:</label>
+                <input type="number" class="form-control" id="prime_max" name="prime_max"
+                    placeholder="e.g. 29">
+            </div>           
+            <div class="col">
+                <button type="submit" class="btn btn-primary mb-4">Generate</button>
+            </div>
+            <div>
+                <p class="mb-1"><strong>Result:</strong></p>
+                <p class="mb-1 result" id="prime-result"></p>
             </div>
         </fieldset>
     </form>

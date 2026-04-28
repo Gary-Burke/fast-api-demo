@@ -51,4 +51,30 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Fetch error:", err);
         }
     });
+
+
+    document.getElementById("prime-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const min = document.getElementById("prime_min").value;
+        const max = document.getElementById("prime_max").value;
+        const primeResult = document.getElementById("prime-result");
+
+        if (min > max) {
+            primeResult.textContent = "Min must be less than max";
+            return;
+        }
+
+        if (!min || !max) {
+            primeResult.textContent = "Please fill out all fields";
+            return;
+        }
+
+        const params = new URLSearchParams({
+            "prime_min": min,
+            "prime_max": max
+        })
+
+    });
+
 });

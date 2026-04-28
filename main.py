@@ -6,6 +6,7 @@ from fastapi.templating import Jinja2Templates
 from random import randint
 from typing import Optional
 from utils import clean_string
+from math import sqrt
 
 app = FastAPI()
 
@@ -58,6 +59,37 @@ async def unique_nums(
     while len(nums) < unique_amount:
         num = randint(unique_min, unique_max)
         if num not in nums and num not in exclude:
+            nums.append(num)
+
+    return JSONResponse(content={"result": nums})
+
+
+@app.get("/prime-numbers")  # Function to generate prime numbers
+async def prime_nums(
+    prime_min: int = 0,
+    prime_max: int = 0,
+):
+    if (prime_min > prime_max):
+        return JSONResponse(
+            status_code=400,
+            content={
+                "error": "Ensure min range is smaller than max",
+            }
+        )
+
+    # Smallest existing prime number is 2
+    if prime_min < 2:
+        prime_min = 2
+
+    nums = []
+
+    for num in range(prime_min, prime_max + 1):  # +1 to include max in range
+        prime = True
+        for i in range(2, int(sqrt(num)) + 1):  # +1 to include sqrt in range
+            if num % i == 0:
+                prime = False
+                break
+        if prime:
             nums.append(num)
 
     return JSONResponse(content={"result": nums})
