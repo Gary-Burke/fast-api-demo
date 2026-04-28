@@ -4,6 +4,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from random import randint
+from typing import Optional
+from utils import clean_string
 
 app = FastAPI()
 
@@ -27,11 +29,23 @@ async def home(request: Request):
 async def unique_nums(
     unique_amount: int = 0,
     unique_min: int = 0,
-    unique_max: int = 0
+    unique_max: int = 0,
+    unique_exclude: Optional[str] = None,
 ):
+    exclude = []
+    if unique_exclude:
+        try:
+            exclude_test = clean_string(unique_exclude)
+            exclude = [int(x) for x in exclude_test]
+        except ValueError:
+            return JSONResponse(
+                status_code=400,
+                content={"error": "Use only numbers for unlucky numbers field"}
+            )
+
     #  Form input validation to ensure amount of numbers is less than range
     #  This also covers validation to prevent min range bigger than max
-    if (unique_amount > (unique_max - unique_min)):
+    if (unique_amount > (unique_max - unique_min - len(exclude))):
         return JSONResponse(
             status_code=400,
             content={
@@ -43,7 +57,7 @@ async def unique_nums(
     nums = []
     while len(nums) < unique_amount:
         num = randint(unique_min, unique_max)
-        if num not in nums:
+        if num not in nums and num not in exclude:
             nums.append(num)
 
     return JSONResponse(content={"result": nums})

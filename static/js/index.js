@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const amount = document.getElementById("unique_amount").value;
         const min = document.getElementById("unique_min").value;
         const max = document.getElementById("unique_max").value;
-
+        const exclude = document.getElementById("unique_exclude").value;
+        
         // Prevent empty fields from being submitted
         if (!amount || !min || !max) {
             resultEl.textContent = "Please fill in all fields.";
@@ -26,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "unique_amount": amount,
             "unique_min": min,
             "unique_max": max,
+            "unique_exclude": exclude,
         });
 
         // Use try/catch to handle Network-, JSON parse- and HTTP errors
