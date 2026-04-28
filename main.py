@@ -29,6 +29,12 @@ async def unique_nums(
     unique_min: int = 0,
     unique_max: int = 0
 ):
+    if (unique_min > unique_max):  # Form input validation to ensure max > min
+        return JSONResponse(
+            status_code=400,
+            content={"error": "Min range must be less than max range"}
+        )
+
     nums = []
     while len(nums) < unique_amount:
         num = randint(unique_min, unique_max)
