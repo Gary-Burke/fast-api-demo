@@ -92,4 +92,7 @@ async def prime_nums(
         if prime:
             nums.append(num)
 
-    return JSONResponse(content={"result": nums})
+    return JSONResponse(
+        content={
+            "result": nums
+            })

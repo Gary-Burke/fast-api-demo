@@ -4,6 +4,7 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     // Call function '/unique-numbers' from main.py with JS Fetch API
+    // Generate unique numbers
     document.getElementById("unique-form").addEventListener("submit", async function (e) {
         e.preventDefault(); // Prevent the page from navigating to the form action URL
 
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const min = document.getElementById("unique_min").value;
         const max = document.getElementById("unique_max").value;
         const exclude = document.getElementById("unique_exclude").value;
-        
+
         // Prevent empty fields from being submitted
         if (!amount || !min || !max) {
             resultEl.textContent = "Please fill in all fields.";
@@ -52,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-
+    // Call function '/prime-numbers' from main.py with JS Fetch API
+    // Generate prime numbers
     document.getElementById("prime-form").addEventListener("submit", async function (e) {
         e.preventDefault();
 
@@ -60,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const max = document.getElementById("prime_max").value;
         const primeResult = document.getElementById("prime-result");
 
-        if (min > max) {
+        if (parseInt(min) > parseInt(max)) {
             primeResult.textContent = "Min must be less than max";
             return;
         }
@@ -74,6 +76,24 @@ document.addEventListener("DOMContentLoaded", function () {
             "prime_min": min,
             "prime_max": max
         })
+
+        try {
+            const response = await fetch(`/prime-numbers?${params}`);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                primeResult.textContent = errorData.error || "Something went wrong. Please try again.";
+                console.error("Bad response:", response.status, errorData);
+                return;
+            }
+
+            const data = await response.json();
+            primeResult.textContent = data.result.join(" ");
+
+        } catch (err) {
+            primeResult.textContent = "Network error. Please check your connection.";
+            console.error("Fetch error:", err);
+        }
 
     });
 
