@@ -6,7 +6,7 @@ from fastapi.templating import Jinja2Templates
 from random import randint
 from typing import Optional
 from utils import clean_string
-from math import sqrt
+from math import sqrt, pi
 
 app = FastAPI()
 
@@ -95,4 +95,35 @@ async def prime_nums(
     return JSONResponse(
         content={
             "result": nums
-            })
+        })
+
+
+@app.get("/circle-values")  # Function to calculate values of a circle
+async def circle_values(
+    circleType: str = None,
+    size: float = 0,
+):
+    if size:
+        try:
+            if circleType == "diameter":
+                radius = size / 2
+                size /= 2
+            else:
+                radius = size
+                size *= 2
+
+            area = round(pi * radius**2, 2)
+            circum = round(2 * pi * radius, 2)
+        except ValueError:
+            return JSONResponse(
+                status_code=400,
+                content={"error": "Please only add numerical values"}
+            )
+
+    return JSONResponse(
+        content={
+            "size": size,
+            "area": area,
+            "circum": circum,
+        }
+    )

@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+
     // Call function '/prime-numbers' from main.py with JS Fetch API
     // Generate prime numbers
     document.getElementById("prime-form").addEventListener("submit", async function (e) {
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const params = new URLSearchParams({
             "prime_min": min,
             "prime_max": max
-        })
+        });
 
         try {
             const response = await fetch(`/prime-numbers?${params}`);
@@ -96,5 +97,72 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
+
+
+    // Calculate values of a circle based on radius/diameter
+    document.getElementById("circle-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const circleType = (document.querySelector("#circle-form input[name='circle_input']:checked")).value;
+        const size = document.getElementById("circle_size").value;
+        const displaySize = document.getElementById("circle-size");
+        const displayArea = document.getElementById("circle-area");
+        const displayCircum = document.getElementById("circle-circum");
+
+        if (!circleType || !size) {
+            displayCircum.textContent = "Please fill out all fields";
+            return;
+        }
+
+        const params = new URLSearchParams({
+            "circleType": circleType,
+            "size": size,
+        });
+
+        try {
+            const response = await fetch(`/circle-values?${params}`);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                displayCircum.textContent = errorData.error || "Something went wrong. Please try again.";
+                console.error("Bad response:", response.status, errorData);
+                return;
+            }
+
+            const data = await response.json();
+
+            displaySize.textContent = data.size;
+            displayArea.textContent = data.area;
+            displayCircum.textContent = data.circum;
+
+        } catch (err) {
+            displayCircum.textContent = "Network error. Please check your connection.";
+            console.error("Fetch error:", err);
+        }
+
+    });
+
+    // Change HTML text based on user selection radius/diameter
+    const circleOptions = document.querySelectorAll("#circle-form input[name='circle_input']");
+    circleOptions.forEach(radio => {
+        radio.addEventListener("change", e => {
+            const circleType = e.target.value;
+            const typeFriendly = capitalize(circleType);
+            document.querySelector("#circle-form label[for='circle_size']").textContent = `${typeFriendly} of Circle:`;
+
+            if (circleType === "diameter") {
+                document.getElementById("circle-size-label").innerHTML = `<strong>Radius:</strong>`;
+            } else {
+                document.getElementById("circle-size-label").innerHTML = `<strong>Diameter:</strong>`;
+            }
+        });
+    });
+
+    /**
+     * Function to capitalize a string (str => Str)
+     */
+    function capitalize(data) {
+        return data.charAt(0).toUpperCase() + data.slice(1).toLowerCase();
+    }
 
 });
