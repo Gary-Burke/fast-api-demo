@@ -6,10 +6,10 @@
 
         <!-- Unique Numbers -->
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <form id="unique-form" class="p-3">
-                <fieldset class="p-3">
+            <form id="unique-form" class="p-2">
+                <fieldset class="p-2">
                     <legend>Unique Numbers</legend>
-                    <div class="hidden">
+                    <div class="">
                         <div class="mb-3">
                             <label for="unique_amount" class="form-label">Amount of numbers:</label>
                             <input type="number" class="form-control" id="unique_amount" name="unique_amount" min="1"
@@ -44,8 +44,8 @@
 
         <!-- Prime Numbers -->
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <form id="prime-form" class="p-3">
-                <fieldset class="p-3">
+            <form id="prime-form" class="p-2">
+                <fieldset class="p-2">
                     <legend>Prime Numbers</legend>
                     <div class="hidden">
                         <div class="mb-3">
@@ -72,8 +72,8 @@
 
         <!-- Circles -->
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <form id="circle-form" class="p-3">
-                <fieldset class="p-3">
+            <form id="circle-form" class="p-2">
+                <fieldset class="p-2">
                     <legend>Circle Values</legend>
                     <div class="hidden">
                         <div class="form-check">
@@ -113,27 +113,33 @@
 
         <!-- Password Generator -->
         <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-            <form id="passw-form" class="p-3">
-                <fieldset class="p-3">
+            <form id="passw-form" class="p-2">
+                <fieldset class="p-2">
                     <legend>Password Generator</legend>
-                    <div class="">                        
+                    <div class="hidden">
 
+                        <!-- Password Length Range -->
                         <div class="my-2">
                             <label for="passw_len" class="form-label">Password Length</label>
-                            <input type="range" class="form-range" min="1" max="4" value="2" step="1" id="passw_len" data-bs-theme="dark">
+                            <input type="range" class="form-range" min="1" max="4" value="2" step="1" id="passw_len"
+                                data-bs-theme="dark">
                             <output for="passw_len" id="passw_output" aria-hidden="true">12 Characters</output>
                         </div>
 
+                        <!-- Special Characters Checkbox -->
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" value="" id="passw_special">
+                            <input class="form-check-input" type="checkbox" value="" id="passw_special" checked>
                             <label class="form-check-label" for="passw_special">
                                 Include special characters
                             </label>
                         </div>
 
+                        <!-- Submit Button -->
                         <div class="col my-4">
                             <button type="submit" class="btn btn-primary">Generate</button>
                         </div>
+
+                        <!-- Result Display -->
                         <div>
                             <p class="mb-1"><strong>Password:</strong></p>
                             <p class="mb-1 result" id="passw-result"></p>

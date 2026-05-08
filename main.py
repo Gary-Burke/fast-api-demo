@@ -8,6 +8,9 @@ from typing import Optional
 from utils import clean_string
 from math import sqrt, pi
 
+import string
+import secrets
+
 app = FastAPI()
 
 # Mount static files (CSS, JS, images)
@@ -125,5 +128,52 @@ async def circle_values(
             "size": size,
             "area": area,
             "circum": circum,
+        }
+    )
+
+
+@app.get("/password-gen")
+async def password_gen(
+    passw_leng: int = 0,
+    passw_special: bool = 0,
+):
+    password = []
+    lengths = {8, 12, 16, 32}
+
+    if passw_special:
+        special = string.punctuation
+    else:
+        special = string.ascii_letters
+
+    char_set = {
+        "lower": string.ascii_lowercase,
+        "upper": string.ascii_uppercase,
+        "numbers": string.digits,
+        "special": special,
+    }
+
+    try:
+        count = passw_leng // 4
+
+        if passw_leng not in lengths:
+            return JSONResponse(
+                status_code=400,
+                content={"error": f"Choose a length in {sorted(lengths)}"}
+            )
+
+        for _ in range(count):
+            for value in char_set.values():
+                password.append(secrets.choice(value))
+    except ValueError:
+        return JSONResponse(
+            status_code=400,
+            content={"error": f"Choose a length in {sorted(lengths)}"}
+        )
+
+    secrets.SystemRandom().shuffle(password)
+
+    return JSONResponse(
+        content={
+            "password": "".join(password),
         }
     )

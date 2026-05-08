@@ -178,14 +178,43 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle range value and display for password length
     const passwInput = document.getElementById("passw_len");
     const passwOutput = document.getElementById("passw_output");
+    let passwLength = 12;
     passwInput.addEventListener("change", function () {
         const inputValue = Number(this.value); // this keyword returns a string, convert to number
-        const lengths = [8, 12, 16, 32]; 
-        const passwLength = lengths[inputValue - 1]; // match indexing of array start 0
-        passwOutput.textContent = `${passwLength} Characters`;        
+        const lengths = [8, 12, 16, 32];
+        passwLength = lengths[inputValue - 1]; // match indexing of array start 0
+        passwOutput.textContent = `${passwLength} Characters`;
     })
 
-    
+    // Call function '/password-gen' to generate random password
+    document.getElementById("passw-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const specialChar = document.getElementById("passw_special").checked;
+        const resultDisplay = document.getElementById("passw-result");
+
+        const params = new URLSearchParams({
+            "passw_leng": passwLength,
+            "passw_special": specialChar,
+        });
+
+        try {
+            const response = await fetch(`/password-gen?${params}`);
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                resultDisplay.textContent = errorData.error || "Something went wrong. Please try again.";
+                console.error("Bad response:", response.status, errorData);
+                return;
+            }
+
+            const data = await response.json();
+            resultDisplay.textContent = data.password;
+        } catch (err) {
+            resultDisplay.textContent = "Network error. Please check your connection.";
+            console.error("Fetch error:", err);
+        }
+    });
 
     /**
      * Function to capitalize a string (str => Str)
