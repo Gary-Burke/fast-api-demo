@@ -3,9 +3,8 @@
 // Wait for the DOM to load before executing functions
 document.addEventListener("DOMContentLoaded", function () {
 
-
+    // Toggle between hidden class upon element click
     const legends = document.querySelectorAll("form legend");
-
     legends.forEach(legend => {
         legend.addEventListener("click", function () {
             const isAlreadyOpen = !legend.nextElementSibling.classList.contains("hidden"); // check if already displayed

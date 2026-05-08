@@ -1,5 +1,5 @@
 :root {
-    --dark-color: #22252b;
+    --dark-color: #1c1e20;
     --light-color: #e6e8ec;
 }
 
@@ -23,7 +23,10 @@ form legend {
     cursor: pointer;
 }
 
-
+.form-check-input:checked {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+}
 
 .hidden {
     display: none;
