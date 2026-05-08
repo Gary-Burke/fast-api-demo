@@ -111,6 +111,38 @@
             </form>
         </div>
 
+        <!-- Password Generator -->
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+            <form id="passw-form" class="p-3">
+                <fieldset class="p-3">
+                    <legend>Password Generator</legend>
+                    <div class="">                        
+
+                        <div class="my-2">
+                            <label for="passw_len" class="form-label">Password Length</label>
+                            <input type="range" class="form-range" min="1" max="4" value="2" step="1" id="passw_len" data-bs-theme="dark">
+                            <output for="passw_len" id="passw_output" aria-hidden="true">12 Characters</output>
+                        </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="passw_special">
+                            <label class="form-check-label" for="passw_special">
+                                Include special characters
+                            </label>
+                        </div>
+
+                        <div class="col my-4">
+                            <button type="submit" class="btn btn-primary">Generate</button>
+                        </div>
+                        <div>
+                            <p class="mb-1"><strong>Password:</strong></p>
+                            <p class="mb-1 result" id="passw-result"></p>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
     </div>
 </div>
 

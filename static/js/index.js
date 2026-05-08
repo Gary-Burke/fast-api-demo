@@ -174,6 +174,19 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+
+    // Handle range value and display for password length
+    const passwInput = document.getElementById("passw_len");
+    const passwOutput = document.getElementById("passw_output");
+    passwInput.addEventListener("change", function () {
+        const inputValue = Number(this.value); // this keyword returns a string, convert to number
+        const lengths = [8, 12, 16, 32]; 
+        const passwLength = lengths[inputValue - 1]; // match indexing of array start 0
+        passwOutput.textContent = `${passwLength} Characters`;        
+    })
+
+    
+
     /**
      * Function to capitalize a string (str => Str)
      */

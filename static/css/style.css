@@ -1,6 +1,6 @@
 :root {
     --dark-color: #1c1e20;
-    --light-color: #e6e8ec;
+    --light-color: #cfd3db;
 }
 
 header {
@@ -27,6 +27,7 @@ form legend {
     background-color: var(--dark-color);
     border-color: var(--dark-color);
 }
+
 
 .hidden {
     display: none;
