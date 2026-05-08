@@ -16,6 +16,17 @@ body {
 form {
     background-color: var(--light-color);
     border-radius: 0.75rem;
+    height: fit-content;
+}
+
+form legend {
+    cursor: pointer;
+}
+
+
+
+.hidden {
+    display: none;
 }
 
 .result {

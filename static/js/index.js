@@ -3,6 +3,23 @@
 // Wait for the DOM to load before executing functions
 document.addEventListener("DOMContentLoaded", function () {
 
+
+    const legends = document.querySelectorAll("form legend");
+
+    legends.forEach(legend => {
+        legend.addEventListener("click", function () {
+            const isAlreadyOpen = !legend.nextElementSibling.classList.contains("hidden"); // check if already displayed
+
+            legends.forEach(el => {
+                el.nextElementSibling.classList.add("hidden"); // hide all
+            });
+
+            if (!isAlreadyOpen) {
+                legend.nextElementSibling.classList.remove("hidden"); // only open if it wasn't already
+            }
+        });
+    });
+
     // Call function '/unique-numbers' from main.py with JS Fetch API
     // Generate unique numbers
     document.getElementById("unique-form").addEventListener("submit", async function (e) {
