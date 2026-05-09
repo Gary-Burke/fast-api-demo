@@ -1,6 +1,7 @@
 :root {
-    --dark-color: #1c1e20;
-    --light-color: #cfd3db;
+    --dark-color: #191a1b;
+    --light-color: #f4f5fc;
+    --alt-color: #d9dde4;
 }
 
 header {
@@ -14,7 +15,7 @@ body {
 }
 
 form {
-    background-color: var(--light-color);
+    background-color: var(--alt-color);
     border-radius: 0.75rem;
     height: fit-content;
 }
@@ -29,12 +30,24 @@ form legend {
 }
 
 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--dark-color);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    background: var(--dark-color);
+    cursor: pointer;
+}
+
 .hidden {
     display: none;
 }
 
 .result {
-  white-space: pre-line;
+    white-space: pre-line;
 }
 
 .btn-primary {
